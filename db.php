@@ -1,9 +1,9 @@
 <?php
-// Database connection settings
+
 $host = 'localhost';
 $dbname = 'todolistproject';
-$username = 'root'; // Adjust if your username is different
-$password = ''; // Replace with your actual database password if set
+$username = 'root'; 
+$password = '';
 
 try {
     $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);

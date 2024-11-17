@@ -16,106 +16,164 @@ $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="style.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Pacifico', cursive;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%);
             color: #333;
             margin: 0;
             padding: 0;
         }
 
         .container {
-            max-width: 600px;
+            max-width: 800px;
             margin: 50px auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+           
+            background: rgba(255, 255, 255, 0.2); 
+            backdrop-filter: blur(50px); 
+            padding: 30px 50px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            color: #fff;
+            text-align: center;
         }
 
-        h1, h2 {
-            text-align: center;
-            color: #333;
+        h1 {
+            font-size: 4.5rem; 
+            font-weight: bold;
+            background: linear-gradient(to right, #ff6f61, #ffb86c, #ffff7e, #69ff94, #a6e9ff, #ff92df);
+            background-clip: text; 
+            -webkit-background-clip: text; 
+            color: transparent; 
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); 
+            animation: rainbowMove 3s infinite linear;
+            -webkit-text-stroke: 2px black;
+         
+        }
+
+        @keyframes rainbowMove {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        h2 {
+            font-size: 30px;
+            font-weight: bold;
+            background: linear-gradient(to right, #ff6f61, #ffb86c, #ffff7e, #69ff94, #a6e9ff, #ff92df);
+            background-clip: text; 
+            -webkit-background-clip: text; 
+            color: transparent; 
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); 
+            -webkit-text-stroke: 2px black;
+            animation: rainbow 3s infinite linear;
+        
+
+        }
+
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
 
         .task-form {
             display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 15px;
+            margin-bottom: 30px;
+            justify-content: center;
         }
 
         .task-form input {
             flex: 1;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
         }
 
         .task-form button {
-            padding: 10px 15px;
-            background-color: #28a745;
+            font-family: 'Pacifico', cursive;
+            padding: 15px 25px;
+            background-color: #007bff;
             color: #fff;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
         }
 
         .task-form button:hover {
-            background-color: #218838;
+            background-color: #0056b3;
         }
 
         .task-list {
             list-style: none;
             padding: 0;
+           
         }
 
         .task-list li {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #f9f9f9;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            margin-bottom: 10px;
+            background: #fafafa;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
         }
 
         .task-list li span {
             flex: 1;
+            font-size: 18px;
+            color: #555;
         }
 
         .task-list .delete-btn {
-            color: #dc3545;
+            color: #e74c3c;
+            font-weight: bold;
             text-decoration: none;
-            margin-right: 10px;
+            padding: 6px 12px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+            margin: 3px;
         }
 
         .task-list .delete-btn:hover {
-            text-decoration: underline;
+            background-color: #f2d7d5;
+            color: #c0392b;
         }
 
         .task-list .edit-form {
             display: flex;
-            gap: 5px;
+            gap: 8px;
         }
 
         .task-list .edit-form input {
-            flex: 1;
-            padding: 5px;
-            border: 1px solid #ccc;
+            padding: 8px;
+            border: 1px solid #ddd;
             border-radius: 4px;
+            font-size: 16px;
         }
 
         .task-list .edit-form button {
-            padding: 5px 10px;
-            background-color: #007bff;
-            color: #fff;
+            font-family: 'Pacifico', cursive;
+            padding: 8px 16px;
+            background-color: #28a745;
+            color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            margin: 3px;
         }
 
         .task-list .edit-form button:hover {
-            background-color: #0056b3;
+            background-color: #218838;
         }
     </style>
 </head>
@@ -134,11 +192,12 @@ $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <?php foreach ($tasks as $task): ?>
                 <li>
                     <span><?php echo htmlspecialchars($task['task']); ?></span>
-                    <a href="delete_task.php?delete=<?php echo $task['id']; ?>" class="delete-btn">Delete</a>
+                    
                     <form method="POST" action="edit_task.php" class="edit-form">
                         <input type="hidden" name="id" value="<?php echo $task['id']; ?>">
                         <input type="text" name="task" value="<?php echo htmlspecialchars($task['task']); ?>" required>
                         <button type="submit">Edit</button>
+                        <a href="delete_task.php?delete=<?php echo $task['id']; ?>" class="delete-btn">Delete</a>
                     </form>
                 </li>
             <?php endforeach; ?>
